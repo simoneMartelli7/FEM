@@ -1,5 +1,6 @@
-//use std::collections::HashMap;
+use std::collections::HashMap;
 use std::io;
+
 
 /*in all this code the following reference frame will be used :
            z
@@ -21,11 +22,53 @@ use std::io;
 
 fn read_input() -> String {
     let mut buffer = String::new();
-    io.stdin().
+    io::stdin().
         read_line(&mut buffer).
         expect("Failed to read line");
     buffer
 }
+
+struct Supports {
+    model: String,
+    vin: Vec<String>,
+    position: f32,
+}
+impl Supports {
+    pub fn new(&mut self) {
+        let mut option: u8;
+        let mut postion: f32;
+
+
+        println!("What support would you like to insert?");
+        println!("1. Appoggio");
+        println!("2. Carrello");
+        println!("3. Incastro");
+
+        option = read_input().parse().unwrap();
+
+        match option {
+            1 => {
+                self.model = String::from("Appoggio");
+                self.vin = vec![String::from("Vertical"), String::from("Horizontal")];
+            }
+            2 => {
+                self.model = String::from("Carrello");
+                self.vin = vec![String::from("Vertical")];
+            }
+            3 => {
+                self.model = String::from("Incastro");
+                self.vin = vec![String::from("Vertical"), String::from("Horizontal"), String::from("Rotation")];
+            }
+        }
+
+        println!("In what position would you like to insert it? \n(In fraction of the length or x/L)");
+        postion = read_input().parse().unwrap();
+        self.position = postion;
+    }
+}
+
+
+
 
 pub struct Rod {
     /* this struct represent a rod element:
@@ -35,9 +78,7 @@ pub struct Rod {
      */
     length: u32,
     alpha: f32,
-    supports: HashMap<f32, String>,
-    //beta: f32,
-    //gamma: f32,
+    supports: struct,
 }
 impl Rod {
     pub fn new(&mut self) -> Rod {
@@ -46,11 +87,11 @@ impl Rod {
 
         println!("Insert dimensions: ");
         print!("Length: ");
-        let l: u32 = read_input();
+        let l: u32 = read_input().parse().unwrap();
         print!("\nAlpha: ");
-        let a: f32 = read_input();
+        let a: f32 = read_input().parse().unwrap();
 
-        Rod {length: l, alpha: a, supports: self.supports}
+        Rod { length: l, alpha: a, supports: self.supports }
     }
     //changes the length of the rod
     pub fn change_l(&mut self, new_length: u32) {
@@ -62,14 +103,10 @@ impl Rod {
     }
 
     pub fn insert_support() {
-        TODO!()
+        todo!()
     }
 }
-pub struct Beam {
-    /* same as rod, the loads will change */
-    length: u32,
-    alpha: f32,
-    beta: f32,
-    gamma: f32,
-}
+
+
+
 
