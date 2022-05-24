@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/simone/FEM/test1/target/debug/build/typenum-89b07bf139de4ac9/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/simone/FEM/test1/target/debug/build/typenum-89b07bf139de4ac9/out/op.rs
