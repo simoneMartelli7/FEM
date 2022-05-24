@@ -45,9 +45,9 @@ fn main() {
     let mut cpe: na::SMatrix<f32, N, 2> = na::SMatrix::zero();
 
     for i in 0..n {
-        let f32_i = f32::try_from(i).unwrap();
+        let i_f32 = f32::try_from(i).unwrap();
         let mut i_u: usize = i as usize;
-        mesh[i_u] = f32_i*basic_element;
+        mesh[i_u] = i_f32*basic_element;
         cpe[(i_u, 0)] = S;
         cpe[(i_u, 2)] = E;
     }
