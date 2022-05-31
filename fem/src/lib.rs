@@ -20,12 +20,13 @@ use std::io;
 }
 */
 
-pub fn read_input() -> String {
+pub fn read_f32() -> f32 {
     let mut buffer = String::new();
     io::stdin().
         read_line(&mut buffer).
         expect("Failed to read line");
-    buffer
+    let buffer2: f32 = buffer.trim().parse().unwrap();
+    buffer2
 }
 
 pub struct Supports {
@@ -44,7 +45,7 @@ impl Supports {
         println!("2. Carrello");
         println!("3. Incastro");
 
-        option = read_input().parse().unwrap();
+        option = read_f32().parse().unwrap();
 
         match option {
             1 => {
@@ -63,7 +64,7 @@ impl Supports {
         }
 
         println!("In what position would you like to insert it? \n(In fraction of the length or x/L)");
-        postion = read_input().parse().unwrap();
+        postion = read_f32().parse().unwrap();
         self.position = postion;
     }
 }
@@ -92,9 +93,9 @@ impl Rod {
 
         println!("Insert dimensions: ");
         print!("Length: ");
-        let l: u32 = read_input().parse().unwrap();
+        let l: u32 = read_f32();
         print!("\nAlpha: ");
-        let a: f32 = read_input().parse().unwrap();
+        let a: f32 = read_f32();
 
         let mut supports = Supports::new();
 
