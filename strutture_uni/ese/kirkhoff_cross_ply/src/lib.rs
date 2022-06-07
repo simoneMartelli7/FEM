@@ -31,7 +31,7 @@ pub fn lam(theta: f32) -> na::Matrix3::<f32>{
 pub fn q_p(E1: f32, E2: f32, nu1: f32, nu2: f32, G: f32) -> na::Matrix3::<f32> {
     let  q_p: na::Matrix3::<f32> = na::Matrix3::new(E1, nu1*E2, 0.0,
                                                            nu1*E2, E2, 0.0,
-                                                            0.0, 0.0, G);
+                                                            0.0, 0.0, G * (1.0 + nu1*nu2));
     1.0/(1.0-nu1*nu2) * q_p
 }
 
@@ -90,6 +90,7 @@ impl Stratum {
         let s_new = Stratum {E1: v[0], E2: v[1], nu1: v[2], nu2: v[3], q: q, zb: zb, zt: zt, G: v[4], theta: theta};
         s_new
     }
+
 
     // the following are three functions only needed in order to not have redundant code in the
     // functions of the same name for the Plate4 struct
@@ -159,6 +160,11 @@ impl Plate4 {
 
         Plate4 { s1: s1, s2: s2, s3: s3, s4: s4, h: h }
     }
+
+    pub fn omogeneous_from_var(e1: f32, e2: f32, nu1: f32, nu2: f32, g: f32, theta: Vec<f32>, h: f32) -> Plate4 {
+       todo!()
+    }
+
 
     pub fn a_mat(&self) -> na::Matrix3::<f32> {
         let a = self.s1.a_mat() + self.s2.a_mat() + self.s3.a_mat() + self.s4.a_mat();
